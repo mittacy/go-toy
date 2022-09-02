@@ -20,7 +20,7 @@ var CmdNew = &cobra.Command{
 
 var (
 	repoURL = "git@github.com:mittacy/go-toy-layout.git"
-	branch  = "v1"
+	branch  = "master"
 )
 
 func init() {
