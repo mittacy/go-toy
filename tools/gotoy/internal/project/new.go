@@ -69,9 +69,8 @@ func (p *Project) New(ctx context.Context, dir string, layout string, branch str
 	fmt.Println(color.WhiteString("$ cd %s", p.Name))
 	fmt.Println(color.WhiteString("$ go mod download "))
 	fmt.Println(color.WhiteString("edit the .env.* configuration file"))
-	fmt.Println(color.WhiteString("$ go build -o ./server ."))
-	fmt.Println(color.WhiteString("$ ./server start http -c=.env.development -e=development -p=8080\n"))
+	fmt.Println(color.WhiteString("$ go run . start http -c=.env.development -e=development -p=8080\n"))
 	fmt.Println("		🤝 Thanks for using go-toy")
-	//fmt.Println("	📚 Tutorial: http://www.mittacy.com/column/1633512445750")
+	fmt.Println("	📚 Tutorial: https://mittacy.github.io/blog/column/1624512335520")
 	return nil
 }
