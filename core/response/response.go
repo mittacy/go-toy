@@ -7,6 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/mittacy/go-toy/core/bizerr"
 	"github.com/mittacy/go-toy/core/log"
+	pkgErr "github.com/pkg/errors"
 	"net/http"
 )
 
@@ -99,10 +100,12 @@ func ValidateErr(c *gin.Context, err error) {
 
 // FailCheckBizErr 检查错误是否为业务错误，否则记录日志并响应未知
 func FailCheckBizErr(c *gin.Context, log *log.Logger, req interface{}, title string, err error) {
-	if !bizerr.IsBizErr(err) {
-		log.ErrorwWithCtx(c, title, "req", req, "err", err)
+	if bizerr.IsBizErr(err) {
+		FailErr(c, pkgErr.Cause(err))
+		return
 	}
 
+	log.ErrorwWithCtx(c, title, "req", req, "err", err)
 	CustomErr(c, http.StatusOK, bizerr.Code(err), err, NilData)
 	return
 }
